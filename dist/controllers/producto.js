@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postProduct = exports.deleteProduct = exports.getProduct = exports.getProducts = void 0;
+exports.updateProduct = exports.postProduct = exports.deleteProduct = exports.getProduct = exports.getProducts = void 0;
 const getProducts = (req, res) => {
     res.json({
         msg: 'get Products'
@@ -25,9 +25,21 @@ const deleteProduct = (req, res) => {
 exports.deleteProduct = deleteProduct;
 const postProduct = (req, res) => {
     const { body } = req;
+    console.log(body);
     res.json({
         msg: 'post Product',
         body: body
     });
 };
 exports.postProduct = postProduct;
+const updateProduct = (req, res) => {
+    const { body } = req;
+    const { id } = req.params;
+    console.log(body);
+    res.json({
+        msg: 'post Product',
+        id: id,
+        body: body
+    });
+};
+exports.updateProduct = updateProduct;
