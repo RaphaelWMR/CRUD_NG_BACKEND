@@ -23,7 +23,7 @@ const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { id } = req.params;
     const product = yield producto_1.default.findByPk(id);
     if (product) {
-        res.json(product); //si existe
+        res.json(product);
     }
     else {
         res.status(404).json({
@@ -43,26 +43,49 @@ const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     else {
         yield product.destroy();
         res.json({
-            msg: `El producti ${id} fue eliminado con exito`
+            msg: 'El producto fue eliminado con exito!'
         });
     }
 });
 exports.deleteProduct = deleteProduct;
-const postProduct = (req, res) => {
+const postProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    res.json({
-        msg: 'post Product',
-        body: body
-    });
-};
+    try {
+        yield producto_1.default.create(body);
+        res.json({
+            msg: `El producto fue agregado con exito!`
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            msg: `Upps ocurrio un error, comuniquese con soporte`
+        });
+    }
+});
 exports.postProduct = postProduct;
-const updateProduct = (req, res) => {
+const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { id } = req.params;
-    res.json({
-        msg: 'post Product',
-        id: id,
-        body: body
-    });
-};
+    try {
+        const product = yield producto_1.default.findByPk(id);
+        if (product) {
+            yield product.update(body);
+            res.json({
+                msg: 'El producto fue actualziado con exito'
+            });
+        }
+        else {
+            res.status(404).json({
+                msg: `No existe un producto con el id ${id}`
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            msg: `Upps ocurrio un error, comuniquese con soporte`
+        });
+    }
+});
 exports.updateProduct = updateProduct;
