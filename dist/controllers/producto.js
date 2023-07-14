@@ -25,7 +25,6 @@ const deleteProduct = (req, res) => {
 exports.deleteProduct = deleteProduct;
 const postProduct = (req, res) => {
     const { body } = req;
-    console.log(body);
     res.json({
         msg: 'post Product',
         body: body
@@ -35,7 +34,6 @@ exports.postProduct = postProduct;
 const updateProduct = (req, res) => {
     const { body } = req;
     const { id } = req.params;
-    console.log(body);
     res.json({
         msg: 'post Product',
         id: id,
