@@ -32,13 +32,21 @@ const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getProduct = getProduct;
-const deleteProduct = (req, res) => {
+const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    res.json({
-        msg: 'delete Product',
-        id: id
-    });
-};
+    const product = yield producto_1.default.findByPk(id);
+    if (!product) {
+        res.status(404).json({
+            msg: `No existe un producto con el id ${id}`
+        });
+    }
+    else {
+        yield product.destroy();
+        res.json({
+            msg: `El producti ${id} fue eliminado con exito`
+        });
+    }
+});
 exports.deleteProduct = deleteProduct;
 const postProduct = (req, res) => {
     const { body } = req;

@@ -18,13 +18,20 @@ export const getProduct = async (req: Request, res: Response) => {
     }
 }
 
-export const deleteProduct = (req: Request, res: Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
+    const product = await Producto.findByPk(id);
+    if (!product) {
+        res.status(404).json({
+            msg: `No existe un producto con el id ${id}`
+        })
+    } else {
+        await product.destroy();
+        res.json({
+            msg: `El producti ${id} fue eliminado con exito`
+        })
+    }
 
-    res.json({
-        msg: 'delete Product',
-        id: id
-    })
 }
 
 export const postProduct = (req: Request, res: Response) => {
