@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import cors from 'cors';
 import routesProducto from '../routes/producto';
 import db from '../db/connection';
 class Server {
@@ -32,6 +33,9 @@ class Server {
     middlewares() {
         //Parseamos el body
         this.app.use(express.json());
+        //Cors
+        this.app.use(cors);
+
     }
     async dbConnect() {
         try {
@@ -41,6 +45,7 @@ class Server {
             console.log(error);
             console.log('Error al conectarse a la base de datos');
         }
+
     }
 }
 export default Server;
