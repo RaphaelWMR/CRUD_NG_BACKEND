@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const producto_1 = __importDefault(require("../routes/producto"));
+const user_1 = __importDefault(require("../routes/user"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
@@ -36,6 +37,7 @@ class Server {
             });
         });
         this.app.use("/api/productos", producto_1.default);
+        this.app.use('/api/users', user_1.default);
     }
     midlewares() {
         //Parseamos el body

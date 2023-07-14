@@ -1,5 +1,6 @@
 import express,{Application,Request,Response, response} from "express"
 import routesProducto from "../routes/producto";
+import routesUser from "../routes/user";
 import db from "../db/connection";
 
 class Server{
@@ -28,6 +29,7 @@ class Server{
             })
         })
        this.app.use("/api/productos",routesProducto);
+       this.app.use('/api/users', routesUser);
     }
 
     midlewares(){
