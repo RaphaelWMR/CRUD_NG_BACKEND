@@ -43,8 +43,14 @@ class Server {
     }
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield connection_1.default.authenticate();
-            console.log('Base de datos conectada');
+            try {
+                yield connection_1.default.authenticate();
+                console.log('Base de datos conectada');
+            }
+            catch (error) {
+                console.log(error);
+                console.log('Error al conectarse a la base de datos');
+            }
         });
     }
 }
