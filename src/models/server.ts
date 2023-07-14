@@ -34,8 +34,13 @@ class Server {
         this.app.use(express.json());
     }
     async dbConnect() {
-        await db.authenticate();
-        console.log('Base de datos conectada')
+        try {
+            await db.authenticate();
+            console.log('Base de datos conectada');
+        } catch (error) {
+            console.log(error);
+            console.log('Error al conectarse a la base de datos');
+        }
     }
 }
 export default Server;
